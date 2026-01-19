@@ -35,7 +35,8 @@ end
 local function _load_state()
   local path = _get_path()
 
-  if not vim.fn.filereadable(path) then
+  -- If state file does not exist, write the file
+  if vim.fn.filereadable(path) == 0 then
     _save_state()
   end
 
