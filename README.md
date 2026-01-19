@@ -7,6 +7,9 @@ all the functionality you need!
   [Harpoon2](https://github.com/ThePrimeagen/harpoon/tree/harpoon2)
 - ~ small: only 147 lines of Lua code (not counting comments and blank lines)
 
+<img width="999" height="682" alt="image" src="https://github.com/user-attachments/assets/d8ebbc6b-7c77-45ec-894d-3e0e9cc9de04" />
+
+
 ## Table of Contents
 
 1. [Motivation](#motivation)
@@ -115,6 +118,17 @@ When editing the menu, you must ensure you follow this syntax
 `[key] = valid-filepath` in order for the tagging to succeed. Otherwise, EZpoon
 will throw an error and not save your changes. Lines with issues will be shown
 with an extmark `X`.
+
+It is also important to note that when entering `valid-filepath`, the file must exists!
+
+**Menu**
+
+<img width="1705" height="941" alt="image" src="https://github.com/user-attachments/assets/185f40c0-b240-4a55-9409-9b1f842d4933" />
+
+**Menu with issues**
+
+<img width="1561" height="833" alt="image" src="https://github.com/user-attachments/assets/93010aba-c9cc-46e4-940e-61039683d292" />
+
 
 Note: These are my keybinds, and you are encouraged to set your own.
 
