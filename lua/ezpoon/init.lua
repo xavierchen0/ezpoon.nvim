@@ -84,6 +84,7 @@ local function _validate_lines(lines)
     local key = string.match(line, "^%[(.-)%]")
     local is_valid_fp = true
     local is_valid_key = true
+    local is_eq_exist = true
 
     if vim.fn.filereadable(vim.fn.expand(filepath)) == 0 then
       is_valid_fp = false
@@ -93,7 +94,11 @@ local function _validate_lines(lines)
       is_valid_key = false
     end
 
-    if not (is_valid_fp and is_valid_key) then
+    if not string.find(line, "=") then
+      is_eq_exist = false
+    end
+
+    if not (is_valid_fp and is_valid_key and is_eq_exist) then
       is_all_valid = false
       table.insert(lines_with_errors, i)
     end
