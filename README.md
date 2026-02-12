@@ -9,7 +9,6 @@ all the functionality you need!
 
 <img width="999" height="682" alt="image" src="https://github.com/user-attachments/assets/d8ebbc6b-7c77-45ec-894d-3e0e9cc9de04" />
 
-
 ## Table of Contents
 
 1. [Motivation](#motivation)
@@ -21,9 +20,9 @@ all the functionality you need!
 
 ## Motivation
 
-You might be wondering: "If Harpoon2 is already great, why use EZpoon?"
+You might be wondering: "If Harpoon2 is already great, why use Hooks?"
 
-EZpoon isn't meant to compete with feature-rich plugins; it's meant to be simple
+Hooks isn't meant to compete with feature-rich plugins; it's meant to be simple
 and disappear into your config. I built this for myself who want to reduce my
 plugin footprint and want to know exactly how my tool works.
 
@@ -115,11 +114,12 @@ will just press `<leader>m2`.
 `<leader>mm`.
 
 When editing the menu, you must ensure you follow this syntax
-`[key] = valid-filepath` in order for the tagging to succeed. Otherwise, EZpoon
+`[key] = valid-filepath` in order for the tagging to succeed. Otherwise, Hooks
 will throw an error and not save your changes. Lines with issues will be shown
 with an extmark `X`.
 
-It is also important to note that when entering `valid-filepath`, the file must exists!
+It is also important to note that when entering `valid-filepath`, the file must
+exists!
 
 **Menu**
 
@@ -128,7 +128,6 @@ It is also important to note that when entering `valid-filepath`, the file must 
 **Menu with issues**
 
 <img width="1561" height="833" alt="image" src="https://github.com/user-attachments/assets/93010aba-c9cc-46e4-940e-61039683d292" />
-
 
 Note: These are my keybinds, and you are encouraged to set your own.
 
@@ -139,9 +138,9 @@ Note: These are my keybinds, and you are encouraged to set your own.
 
 ```lua
 {
-  'xavierchen0/ezpoon',
+  'xavierchen0/hooks.nvim',
   config = function()
-    local ez = require("ezpoon")
+    local h = require("hooks")
     -- Add your basic setup here (see below for full config)
   end
 }
@@ -153,15 +152,15 @@ Note: These are my keybinds, and you are encouraged to set your own.
   <summary>Neovim native package</summary>
 
 ```sh
-git clone --depth=1 https://github.com/xavierchen0/ezpoon.git \
-  "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/ezpoon/start/ezpoon
+git clone --depth=1 https://github.com/xavierchen0/hooks.nvim.git \
+  "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/hooks.nvim/start/hooks.nvim
 ```
 
 or
 
 ```lua
 vim.pack.add({
-  { src = "https://github.com/xavierchen0/ezpoon" },
+  { src = "https://github.com/xavierchen0/hooks.nvim" },
 })
 ```
 
@@ -170,7 +169,7 @@ vim.pack.add({
 ## Full Config
 
 ```lua
-local ez = require("ezpoon")
+local h = require("hooks")
 -- Typically, you want to keep this to a small number as you are usually
 -- interacting with a small set of working files
 local valid_keys = {
@@ -189,19 +188,19 @@ local prefix = "<leader>m"
 for _, key in ipairs(valid_keys) do
   -- Add the keymaps to jump to a file
   vim.keymap.set("n", prefix .. key, function()
-    ez.jump(key)
-  end, { desc = "EZpoon: Jump to [" .. key .. "]" })
+    h.jump(key)
+  end, { desc = "Hooks: Jump to [" .. key .. "]" })
 
   -- Add the keymaps to add a file
   vim.keymap.set("n", prefix .. "a" .. key, function()
-    ez.add(key)
-  end, { desc = "EZpoon: Add current file to [" .. key .. "]" })
+    h.add(key)
+  end, { desc = "Hooks: Add current file to [" .. key .. "]" })
 end
 
 -- Opens the editable menu
 vim.keymap.set("n", prefix .. "m", function()
-  ez.menu()
-end, { desc = "EZpoon: Open editable menu" })
+  h.menu()
+end, { desc = "Hooks: Open editable menu" })
 
 -- Optional: Autocmd to return to last position in a file
 -- Useful when you just launch nvim, and you used your defined keymaps to jump
@@ -238,22 +237,22 @@ end, { desc = "EZpoon: Open editable menu" })
 
 ## APIs
 
-EZpoon exposes a raw Lua table. There is no `setup()` function required; simply
+Hooks exposes a raw Lua table. There is no `setup()` function required; simply
 `require` the module and call the functions.
 
-### `require("ezpoon").add(key)`
+### `require("hooks").add(key)`
 
 Assigns the **current buffer's file path** to the specified slot.
 
 - **key** (`string`): The slot identifier (e.g., `"a"`, `"1"`).
 
-### `require("ezpoon").jump(key)`
+### `require("hooks").jump(key)`
 
 Navigates to the file stored in the specified slot.
 
 - **key** (`string`): The slot identifier.
 
-### `require("ezpoon").menu()`
+### `require("hooks").menu()`
 
 Opens the **Floating Management Window** to view, edit, or delete slots.
 
